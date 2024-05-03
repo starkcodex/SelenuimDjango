@@ -11,7 +11,7 @@
                     {% else %}
                         class="nav-link"
                     {% endif %}
-                        aria-current="page" href="{% url 'home' %}">Home</a>
+                        aria-current="page" href="{% url 'home' %}"><i class="fa-solid fa-house-user"></i>Home</a>
                 </li>
                 <li class="nav-item">
                 <a 
@@ -20,17 +20,17 @@
                 {% else %}
                     class="nav-link"
                 {% endif %}
-                    aria-current="page" href="{% url 'contact_us' %}">Contact Us</a>
+                    aria-current="page" href="{% url 'contact_us' %}"><i class="fa-solid fa-address-book"></i>Contact Us</a>
                 </li>
             </ul>
         </div>
             <ul class="navbar-nav mb-2 mb-lg-0 justify-content-end">
                 {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#">{{user.username}}</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'profile' user.username %}"><i class="fa-solid fa-user"></i>{{user.username}}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Logout</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
                     </li>
 
                     {% else %}
@@ -41,7 +41,7 @@
                             {% else %}
                                 class="nav-link"
                             {% endif %}
-                            aria-current="page" href="{% url 'login' %}">Login</a>
+                            aria-current="page" href="{% url 'login' %}"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
                         </li>
                         <li class="nav-item">
                             <a
@@ -50,7 +50,7 @@
                             {% else %}
                                 class="nav-link"
                             {% endif %}
-                            href="{% url 'register' %}">Signup</a>
+                            href="{% url 'register' %}"><i class="fa-solid fa-user-plus"></i>Signup</a>
                         </li>
                     {% endif %}
             </ul>   

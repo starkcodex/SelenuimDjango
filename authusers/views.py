@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from .forms import SignupForm, LoginUserForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from main.models import Blog
 
+from .forms import PasswordChangeForm
+
+from django.contrib.auth.views import PasswordChangeView
 
 def signup(request):
     if request.method == 'POST':
@@ -51,3 +56,20 @@ def logOut(request):
     logout(request)
     messages.success(request, 'You can Logged Out Successfully !')
     return redirect("home")
+
+
+def profile(request, user_name):
+    user_related_data = Blog.objects.filter(author__username= user_name)
+    context = {
+        "user_related_data": user_related_data
+    }
+    return render(request, 'authors/profile.html', context)
+
+
+class PasswordChangeView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy()
+    
+
+def password_success(request):
+    return render(request, 'authors/password_change_success.html')
