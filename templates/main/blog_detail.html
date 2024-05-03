@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="conatiner">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ blog.name }}</h2>
+            <span>Author: {{blog.author}}</span>
+            <div>
+                <small>{{blog.post_date}}</small>
+            </div>
+
+            <div>
+                <p>{{blog.description}}</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <ul class="list-group">
+                {% for blogs in all_blogs %}
+                    <li class="list-group-item">
+                        <a href="{% url "detail" blogs.slug %}" class="text-decoration-none">{{ blogs.name }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
