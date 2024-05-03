@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Blog, BlogComment
+from .forms import ContactForm
+from django.contrib import messages
+
 
 def home(request):
     all_blogs = Blog.objects.all()
@@ -20,7 +23,15 @@ def profile(request):
 
 
 def contact_us(request):
-    return render(request, "main/contact_us.html")
+    form=ContactForm()
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "your form is submitted successfully. ")
+    else:
+        form = ContactForm()
+    return render(request, "main/contact_us.html", {"form":form})
 
 
 def new_emp(request):
